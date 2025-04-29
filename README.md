@@ -30,12 +30,57 @@ This project simulates a cyber attack and defensive response within a segmented 
 
 
 <p align="center">
-Initial Setup <br/>
+Configured the network layout with a router, switch, two legitimate PCs, a web server, and an attacker PC. All devices were properly cabled using straight-through Ethernet connections. <br/>
 <img src="https://i.imgur.com/iq0VCfo.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 <br />
+Created separate VLANs for different device groups. <br/>
+<img src="https://i.imgur.com/sPOIhxA.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+<br />
+After creating and assigning VLANs, verified the VLAN configuration on the switch to ensure all devices were correctly segmented. <br/>
+<img src="https://i.imgur.com/30eKtVK.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+Set up sub-interfaces on the router's physical interface with 802.1Q encapsulation for each VLAN. Enabled inter-VLAN routing by assigning gateway IPs for each VLAN subnet. <br/>
+<img src="https://i.imgur.com/zW1Up2O.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+Configured the switch port connected to the router (GigabitEthernet0/1) as a trunk port using 802.1Q encapsulation. This allows VLAN-tagged traffic from all defined VLANs (10, 20, 30) to be carried across the trunk link to the router. <br/>
+<img src="https://i.imgur.com/5zCbJvE.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+Manually configured static IP addresses, subnet masks, and default gateways on each device to align with the VLAN structure and router sub-interface addresses. <br/>
+<img src="https://i.imgur.com/PDfBBix.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+Manually configured static IP addresses, subnet masks, and default gateways on each device to align with the VLAN structure and router sub-interface addresses part 2. <br/>
+<img src="https://i.imgur.com/Kc8m6DD.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+Verified basic network connectivity by pinging between devices across VLANs, ensuring legitimate PCs could reach the web server and each other through the router. <br/>
+<img src="https://i.imgur.com/xmJUAf2.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+In the attacker PC; Conducted manual port scanning using Telnet to discover open services on the web server. We can see that insecure ports such as FTP and HTTP are allowed. <br/>
+<img src="https://i.imgur.com/93a8pB0.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+In the attacker PC; Simulated basic DoS behavior by manually sending repeated ICMP ping requests.  <br/>
+<img src="https://i.imgur.com/9R4BAqR.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+Enable switchport security <br/>
+<img src="https://i.imgur.com/ToxB6tB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
+Created an extended Access Control List (ACL) to specifically block the attacker PC’s IP address from reaching any destination. Applied the ACL inbound on the router’s trunk link interface. <br/>
+<img src="https://i.imgur.com/y8fckyI.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<br />
+<br />
 Request time out after impementing ACL on VLANs <br/>
-<img src="https://i.imgur.com/EHo0rn8.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/cK6SDRE.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
 <br />
 
   
